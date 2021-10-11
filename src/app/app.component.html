@@ -10,7 +10,8 @@
   </div>
   <div class="col-md-3"> </div>
 </div>
-<mat-tab-group dir="rtl" style="padding-right: 25%;padding-top: 30px;">
+<mat-tab-group (selectedTabChange) = "onChangeTab($event)"
+ style="padding-right: 500px;" dir="rtl">
   <mat-tab label="הכל"> </mat-tab>
   <mat-tab label="נבחרו"> </mat-tab>
   <mat-tab label="לא נבחרו"> </mat-tab>
@@ -18,52 +19,43 @@
 <div class="row" style="padding-top: 30px;">
   <div class="col-md-3"></div>
   <div class="col-md-6">
-    <!-- <button (click)="toggleColor()"
-        [ngStyle]="{
-          'background-color' : toggle ? 'yellow' : 'pink'
-        }"
->Click me</button> -->
-    <ul style="display: inline;" *ngFor="let item of list | slice:0:5; let i=index">
+    <ul style="display: inline;" *ngFor="let item of list;">
       <button mat-button>{{item}}</button>
     </ul>
   </div>
   <div class="col-md-3" style="padding-right: 130px;" dir="rtl">
-    <strong>  סך שמות זהים :</strong></div>
+    <strong> סך שמות זהים :</strong>
+  </div>
 </div>
 <div class="row" style="padding-top: 30px;">
   <div class="col-md-3"></div>
   <div class="col-md-6">
-    <ul style="display: inline;" *ngFor="let item of items | slice:0:5; let i=index">
-      <button mat-button (click)="cardsClick(item.text,i)" 
-      [ngStyle]="{'background-color' : toggle ? 'yellow' : ''}">{{item.text}}</button>
-    </ul>
-    <br>
-    <ul style="display: inline;" *ngFor="let item of list2 | slice:0:5; let i=index">
-      <button mat-button>{{item}}</button>
-    </ul>
-    <br>
-    <ul style="display: inline;" *ngFor="let item of list3 | slice:0:5; let i=index">
-      <button mat-button>{{item}}</button>
-    </ul>
-    <!-- <table class="table table-striped">
-      <td style="display: inline;" *ngFor="let item of list | slice:0:5; let i=index">
-        <div> <div style="display: inline;" *ngFor="let in of list.slice(0, 5); ">
-         <button type="button" mat-button 
-         [ngClass] = "{'green':!flag, 'red':flag}"
-          (click)="cardsClick(i+1)">{{i+1}}</button>
-        </div></div>
-      </td>
-    </table> -->
+    <table>
+      <tbody >
+        <tr>
+          <td *ngFor="let item of data | slice:0:4; "><button mat-button [ngClass]="{selected: item.isSelected}"
+              (click)="changeColor(item.id,item.text)">{{item.text}}</button></td>   
+        </tr>
+        <tr>
+          <td *ngFor="let item of data | slice:4:8; "><button mat-button [ngClass]="{selected: item.isSelected}"
+              (click)="changeColor(item.id,item.text)">{{item.text}}</button></td>
+        </tr>
+        <tr>
+          <td *ngFor="let item of data | slice:8:13; "><button mat-button [ngClass]="{selected: item.isSelected}"
+              (click)="changeColor(item.id,item.text)">{{item.text}}</button></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div class="col-md-3" style="padding-right: 130px;" dir="rtl">
-   <strong> סך שמות כוללים :</strong>
-  <br>
-  <br>
-  <br>
-   <strong>רשימת כרטיסים שנבחרו :</strong>
-   <br>
-   <br>
-   <input dir="rtl" type="text" placeholder="{{numberList}}" >
+    <strong> סך שמות כוללים :</strong>
+    <br>
+    <br>
+    <br>
+    <strong>רשימת כרטיסים שנבחרו :</strong>
+    <br>
+    <br>
+    <input dir="rtl" type="text" placeholder="{{numberList}}">
   </div>
 </div>
 <!-- <div class="row" style="padding-top: 30px;">
